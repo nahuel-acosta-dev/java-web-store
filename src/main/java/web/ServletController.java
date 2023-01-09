@@ -35,18 +35,32 @@ public class ServletController extends HttpServlet {
     private void actionDefault(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Admin> admins = null;
-        try {
-            admins = new AdminDaoJDBC().select();
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            System.out.println("admins = " + admins);
-            request.setAttribute("admin", admins);
-            request.getRequestDispatcher("admin.jsp").forward(request, response);
-        }
+        HttpSession sesion;
 
+        sesion = request.getSession();
+
+        if (sesion.getAttribute("admin") != null) {
+            System.out.println("el resultado es el siguiente: ");
+            System.out.println(sesion.getAttribute("admin"));
+            request.getRequestDispatcher("home_admin.jsp").forward(request, response);
+        } else {
+            List<Admin> admins = null;
+            try {
+                admins = new AdminDaoJDBC().select();
+            } catch (SQLException ex) {
+                ex.printStackTrace(System.out);
+            } finally {
+                System.out.println("admins = " + admins);
+                //request.setAttribute("admin", admins);
+                request.getRequestDispatcher("admin.jsp").forward(request, response);
+            }
+
+        }
     }
+
+    /**
+     * ********************************POST*****************************
+     */
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -56,6 +70,9 @@ public class ServletController extends HttpServlet {
             switch (action) {
                 case "login":
                     login(request, response);
+                    break;
+                case "logout":
+                    logOut(request, response);
                     break;
                 case "insert":
                     insertAdmin(request, response);
@@ -82,7 +99,7 @@ public class ServletController extends HttpServlet {
         String password = request.getParameter("password");
 
         String encPassword = encryptPassword(password);
-        
+
         admin.setEmail(email);
         admin.setPassword(encPassword);
         try {
@@ -90,21 +107,20 @@ public class ServletController extends HttpServlet {
             if (resultAdmin != null) {
                 sesion = request.getSession();
                 sesion.setAttribute("admin", resultAdmin);
-                request.setAttribute("msje", "welcome the sistem");
-                request.getRequestDispatcher("exito.jsp").forward(request, response);
+                System.out.println(sesion.getAttribute("admin"));
+                request.setAttribute("msje", "Bienvenido al sistema");
+                request.getRequestDispatcher("home_admin.jsp").forward(request, response);
             } else {
-                request.getRequestDispatcher("error.jsp").forward(request, response);
+                request.setAttribute("msje",
+                        "Error al intentar iniciar sesion, revise sus credenciales.");
+                this.actionDefault(request, response);
             }
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+            request.setAttribute("msje",
+                    "Error al intentar iniciar sesion");
+            this.actionDefault(request, response);
         }
-
-    }
-
-    private void insertAdmin(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
     }
 
     private String encryptPassword(String password) {
@@ -128,5 +144,33 @@ public class ServletController extends HttpServlet {
 
     /**
      * ***************end*************************
+     */
+    /**
+     * **************lOGOUT**********************
+     */
+    private void logOut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession sesion = request.getSession();
+        sesion.setAttribute("admin", null);
+        sesion.invalidate();
+        this.actionDefault(request, response);
+    }
+
+    /**
+     * ***************end*************************
+     */
+    /**
+     * **************CREATE ADMIN*****************
+     */
+    private void insertAdmin(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+    }
+
+    /**
+     * ***************end*************************
+     */
+    /**
+     * *******************END***************************
      */
 }

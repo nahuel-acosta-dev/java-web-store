@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
         <head>
@@ -32,13 +33,23 @@
                           <li><span class="nav-item fw-bold mb-5">Nombre</span></li>
                           <li><span class="nav-item fw-bold mb-5">example@gmail.com</span></li>
                           <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Salir</a></li>
+                          <li>
+                            <form action="${pageContext.request.contextPath}/ServletController?action=logout" 
+                      method="POST">
+                                <button type="submit" class="dropdown-item">Salir</button>
+                            </form>  
+                          </li>
                         </ul>
                       </li>
                     </ul>
                   </div>
                 </div>
               </nav>
+              <main>
+                     <span>user: ${admin.name}</span>     
+              </main>        
+                            
+                      
                 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>     
         </body>

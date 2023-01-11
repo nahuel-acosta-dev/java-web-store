@@ -3,16 +3,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : 29 dic. 2022, 20:56:38
+    Created on : 9 ene. 2023, 20:58:36
     Author     : Nahuel
 */
-.bg-secondary {
-    background-color: #063970!important;
-}
-body{
-    padding-left: 20px;
-    
-}
-.main{
-    height: 96vh;
+
+.navdropdow_admin{
+    max-width: 13rem !important;
+    word-wrap: break-word !important;
+    font-size: .9rem;
 }

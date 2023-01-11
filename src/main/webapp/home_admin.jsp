@@ -14,39 +14,16 @@
             <meta name="theme-color" content="#000000" />
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
             <script src="https://kit.fontawesome.com/50f085f1e4.js" crossorigin="anonymous"></script>
+            <link rel="stylesheet" href="static/css/home_admin.css">
             <title>Administrador</title>
         </head>
         <body>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="container-fluid">
-                  <a class="navbar-brand ms-5" href="#">Administrador</a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse nav justify-content-end" id="navbarNavDropdown">
-                    <ul class="navbar-nav me-5">
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Cerrar sesion
-                        </a>
-                        <ul class="dropdown-menu text-center px-2" aria-labelledby="navbarDropdownMenuLink">
-                          <li><span class="nav-item fw-bold mb-5">Nombre</span></li>
-                          <li><span class="nav-item fw-bold mb-5">example@gmail.com</span></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li>
-                            <form action="${pageContext.request.contextPath}/ServletController?action=logout" 
-                      method="POST">
-                                <button type="submit" class="dropdown-item">Salir</button>
-                            </form>  
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </nav>
+                <header>
+                    <jsp:include page="WEB-INF/pages/common/admin/nav_admin.jsp"/>
+                </header>
               <main>
-                     <span>user: ${admin.name}</span>     
+                      
+                        
               </main>        
                             
                       

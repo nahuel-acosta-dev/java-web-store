@@ -22,8 +22,11 @@
                     <jsp:include page="WEB-INF/pages/common/admin/nav_admin.jsp"/>
                 </header>
               <main>
-                      
-                        
+                      <ul>
+                              <c:forEach var="admin" items="${admins}">
+                                  <li>${admin.name}</li>
+                              </c:forEach>
+                      </ul>
               </main>        
                             
                       

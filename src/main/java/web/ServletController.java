@@ -38,23 +38,21 @@ public class ServletController extends HttpServlet {
         HttpSession sesion;
 
         sesion = request.getSession();
-
+        List<Admin> admins = null;
         if (sesion.getAttribute("admin") != null) {
             System.out.println("el resultado es el siguiente: ");
             System.out.println(sesion.getAttribute("admin"));
-            request.getRequestDispatcher("home_admin.jsp").forward(request, response);
-        } else {
-            List<Admin> admins = null;
             try {
                 admins = new AdminDaoJDBC().select();
             } catch (SQLException ex) {
                 ex.printStackTrace(System.out);
             } finally {
                 System.out.println("admins = " + admins);
-                //request.setAttribute("admin", admins);
-                request.getRequestDispatcher("admin.jsp").forward(request, response);
+                request.setAttribute("admins", admins);
+                request.getRequestDispatcher("home_admin.jsp").forward(request, response);
             }
-
+        } else {
+            request.getRequestDispatcher("admin.jsp").forward(request, response);
         }
     }
 

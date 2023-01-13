@@ -37,42 +37,6 @@ public class AdminDaoJDBC implements AdminDao {
 
     private static final String SQL_DELETE = "DELETE FROM admin WHERE id_admin = ?";
     
-    /*public int identify(Admin admin) throws Exception{
-        //Admin usu = null;
-        int result = 0;
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        try{
-            conn = ConnectionJDBC.getConnection();
-            stmt = conn.prepareStatement(SQL_SELECT_CREDENTIALS);
-            rs = stmt.executeQuery();
-            //rs.absolute(1);
-            while(rs.next()){
-                result +=1;
-                String email = rs.getString("email");
-                String password = rs.getString("password");
-                admin.setEmail(email);
-                admin.setPassword(password);
-            }
-            
-        }catch(Exception ex){
-            ex.printStackTrace(System.out);
-            result =0;
-        }finally{
-            ConnectionJDBC.close(rs);
-            ConnectionJDBC.close(stmt);
-            ConnectionJDBC.close(conn);
-        }
-        
-         if(result==1){
-                return 1;
-        }
-        else{
-            return 0;
-        }
-            
-    }*/
     
     public Admin identify(Admin admin) throws Exception, SQLException{
         Connection conn = null;

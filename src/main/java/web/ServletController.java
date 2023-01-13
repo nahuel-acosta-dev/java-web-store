@@ -1,7 +1,9 @@
 package web;
 
 import data.AdminDaoJDBC;
+import data.ProductDaoJDBC;
 import domain.Admin;
+import domain.Product;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -38,17 +40,17 @@ public class ServletController extends HttpServlet {
         HttpSession sesion;
 
         sesion = request.getSession();
-        List<Admin> admins = null;
+        List<Product> products = null;
         if (sesion.getAttribute("admin") != null) {
             System.out.println("el resultado es el siguiente: ");
             System.out.println(sesion.getAttribute("admin"));
             try {
-                admins = new AdminDaoJDBC().select();
+                products = new ProductDaoJDBC().select();
             } catch (SQLException ex) {
                 ex.printStackTrace(System.out);
             } finally {
-                System.out.println("admins = " + admins);
-                request.setAttribute("admins", admins);
+                System.out.println("products = " + products);
+                request.setAttribute("products", products);
                 request.getRequestDispatcher("home_admin.jsp").forward(request, response);
             }
         } else {
@@ -107,16 +109,16 @@ public class ServletController extends HttpServlet {
                 sesion.setAttribute("admin", resultAdmin);
                 System.out.println(sesion.getAttribute("admin"));
                 request.setAttribute("msje", "Bienvenido al sistema");
-                request.getRequestDispatcher("home_admin.jsp").forward(request, response);
             } else {
                 request.setAttribute("msje",
                         "Error al intentar iniciar sesion, revise sus credenciales.");
-                this.actionDefault(request, response);
             }
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
             request.setAttribute("msje",
                     "Error al intentar iniciar sesion");
+        }
+        finally{
             this.actionDefault(request, response);
         }
     }

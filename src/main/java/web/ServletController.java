@@ -46,15 +46,18 @@ public class ServletController extends HttpServlet {
             System.out.println(sesion.getAttribute("admin"));
             try {
                 products = new ProductDaoJDBC().select();
+                sesion.setAttribute("products", products);
             } catch (SQLException ex) {
                 ex.printStackTrace(System.out);
             } finally {
                 System.out.println("products = " + products);
-                request.setAttribute("products", products);
-                request.getRequestDispatcher("home_admin.jsp").forward(request, response);
+                /*request.setAttribute("products", products);
+                request.getRequestDispatcher("home_admin.jsp").forward(request, response);*/
+                response.sendRedirect("home_admin.jsp");
             }
         } else {
-            request.getRequestDispatcher("admin.jsp").forward(request, response);
+            //request.getRequestDispatcher("admin.jsp").forward(request, response);
+            response.sendRedirect("admin.jsp");
         }
     }
 
@@ -102,20 +105,26 @@ public class ServletController extends HttpServlet {
 
         admin.setEmail(email);
         admin.setPassword(encPassword);
+        sesion = request.getSession();
         try {
             Admin resultAdmin = adminDao.identify(admin);
             if (resultAdmin != null) {
-                sesion = request.getSession();
                 sesion.setAttribute("admin", resultAdmin);
                 System.out.println(sesion.getAttribute("admin"));
-                request.setAttribute("msje", "Bienvenido al sistema");
+                //request.setAttribute("msje", "Bienvenido al sistema");
+                sesion.setAttribute("msje", "Bienvenido al sistema");
             } else {
-                request.setAttribute("msje",
+                /*request.setAttribute("msje",
+                        "Error al intentar iniciar sesion, revise sus credenciales.");*/
+                
+                sesion.setAttribute("msje",
                         "Error al intentar iniciar sesion, revise sus credenciales.");
             }
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
-            request.setAttribute("msje",
+            /*request.setAttribute("msje",
+                    "Error al intentar iniciar sesion");*/
+            sesion.setAttribute("msje",
                     "Error al intentar iniciar sesion");
         }
         finally{
@@ -136,7 +145,7 @@ public class ServletController extends HttpServlet {
                 encString = "0" + encString;
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace(System.out);
         }
 
         return encString;
@@ -160,16 +169,51 @@ public class ServletController extends HttpServlet {
      * ***************end*************************
      */
     /**
+     * 
+     * 
      * **************CREATE ADMIN*****************
      */
     private void insertAdmin(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        String name = request.getParameter("name");
+        String lastName = request.getParameter("last_name");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String superUser = request.getParameter("super_user");
+        boolean valueSuperUser = false;
+        String encPassword = encryptPassword(password);
+        HttpSession sesion = request.getSession();
+        
+        if(superUser != null){
+            valueSuperUser = true;
+        }
+        
+        //creamos el nuevo admin
+        
+        
+        try {
+            Admin admin = new Admin(name, lastName, email, encPassword, valueSuperUser);
+            System.out.println("el siguiente es el admin");
+            System.out.println(admin);
+            //insertamos el nuevo objeto en la base de datos
+            int modifiedRecords = new AdminDaoJDBC().insert(admin);
+            System.out.println("registros modificados " + modifiedRecords);
+            sesion.setAttribute("msje_admin","Administrador agregado con exito");
+        } catch (SQLException ex) {
+            sesion.setAttribute("msje_admin","Error al intentar agregar un administrador");
+            ex.printStackTrace(System.out);
+        }
+        finally{
+            this.actionDefault(request, response);
+        }
     }
 
     /**
      * ***************end*************************
      */
+    
+    
+    
     /**
      * *******************END***************************
      */

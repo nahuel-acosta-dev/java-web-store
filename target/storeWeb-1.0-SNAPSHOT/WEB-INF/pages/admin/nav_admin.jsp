@@ -8,11 +8,16 @@
         <ul class="navbar-nav me-5">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Cerrar sesion
+              ${admin.name.toUpperCase()} ${admin.lastName.toUpperCase()}
             </a>
             <ul class="dropdown-menu text-center px-2 navdropdow_admin" id="navdropdow_admin" aria-labelledby="navbarDropdownMenuLink">
-              <li class="mb-2"><span class="nav-item fw-bold mb-5">${admin.name.toUpperCase()} ${admin.lastName.toUpperCase()}</span></li>
               <li class="mb-2"><span class="nav-item fw-bold mb-5">${admin.email}</span></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="fa-thin fa-plus"></i> 
+                            Agregar Admin
+                    </button>
+              </li>
               <li><hr class="dropdown-divider"></li>
               <li>
                 <form action="${pageContext.request.contextPath}/ServletController?action=logout" 

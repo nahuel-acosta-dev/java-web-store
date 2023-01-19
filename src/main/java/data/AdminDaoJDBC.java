@@ -19,21 +19,21 @@ import java.util.List;
  */
 public class AdminDaoJDBC implements AdminDao {
 
-    private static final String SQL_SELECT = "SELECT id_admin, name, lastName, email, password, super_user "
+    private static final String SQL_SELECT = "SELECT id_admin, name, last_name, email, password, super_user "
             + " FROM admin";
     
     private static final String SQL_SELECT_CREDENTIALS = "SELECT * "
             + "FROM admin WHERE email = ? and password = ?";
                 
 
-    private static final String SQL_SELECT_BY_ID = "SELECT id_admin, name, lastName, email, password "
+    private static final String SQL_SELECT_BY_ID = "SELECT id_admin, name, last_name, email, password, super_user "
             + "FROM admin WHERE id_admin = ?";
 
-    private static final String SQL_INSERT = "INSERT INTO admin(name, lastName, email, password) "
-            + " VALUES(?, ?, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO admin(name, last_name, email, password, super_user) "
+            + " VALUES(?, ?, ?, ?, ?)";
 
     private static final String SQL_UPDATE = "UPDATE admin "
-            + " SET name=?, lastName=?, email=?, password=? WHERE id_admin=?";
+            + " SET name=?, last_name=?, email=?, password=?, super_user=? WHERE id_admin=?";
 
     private static final String SQL_DELETE = "DELETE FROM admin WHERE id_admin = ?";
     
@@ -172,8 +172,9 @@ public class AdminDaoJDBC implements AdminDao {
             stmt.setString(2, admin.getLastName());
             stmt.setString(3, admin.getEmail());
             stmt.setString(4, admin.getPassword());
-
+            stmt.setBoolean(5, admin.getSuperUser());
             rows = stmt.executeUpdate();
+            
 
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);

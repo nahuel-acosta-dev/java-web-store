@@ -80,7 +80,7 @@ public class Admin {
         this.password = password;
     }
 
-    public boolean isSuperUser() {
+    public boolean getSuperUser() {
         return superUser;
     }
 

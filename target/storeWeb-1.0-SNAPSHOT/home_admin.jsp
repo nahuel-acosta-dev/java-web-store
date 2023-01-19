@@ -1,9 +1,3 @@
-<%-- 
-    Document   : exito
-    Created on : 5 ene. 2023, 19:12:03
-    Author     : Nahuel
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -19,18 +13,26 @@
         </head>
         <body>
                 <header>
-                    <jsp:include page="WEB-INF/pages/common/admin/nav_admin.jsp"/>
+                    <jsp:include page="WEB-INF/pages/admin/nav_admin.jsp"/>
                 </header>
               <main>
+                      <c:if test="${sessionScope['msje'] != null}">
+                        ${sessionScope['msje']}
+                      </c:if>
                       <ul>
-                              <c:forEach var="product" items="${products}">
-                                  <li>${product.name}</li>
-                              </c:forEach>
+                        <c:forEach var="product" items="${products}">
+                            <li>${product.name}</li>
+                        </c:forEach>
                       </ul>
               </main>        
                             
-              <jsp:include page="WEB-INF/pages/common/admin/footer.jsp"/>   
-                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>     
+              <jsp:include page="WEB-INF/pages/common/footer.jsp"/> 
+              <jsp:include page="WEB-INF/pages/admin/add_admin.jsp"/> 
+              <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
+                      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
+                      crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" 
+                        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
+                        crossorigin="anonymous"></script>   
         </body>
 </html>

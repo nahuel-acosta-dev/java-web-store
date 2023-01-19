@@ -21,7 +21,9 @@
                              ">
 
                                 <span class="text-warning text-uppercase fs-4 fw-normal" role="alert">
-                                        ${pageContext.request.getAttribute("msje")}
+                                        <c:if test="${sessionScope['msje'] != null}">
+                                            ${sessionScope['msje']}
+                                        </c:if>
                                 </span>
 
                                 <h1 class="text-white">Iniciar sesión</h1>

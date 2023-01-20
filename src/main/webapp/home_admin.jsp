@@ -13,12 +13,17 @@
         </head>
         <body>
                 <header>
-                    <jsp:include page="WEB-INF/pages/admin/nav_admin.jsp"/>
+                    <jsp:include page="WEB-INF/pages/admin/common/nav_admin.jsp"/>
                 </header>
               <main>
                       <c:if test="${sessionScope['msje'] != null}">
                         ${sessionScope['msje']}
                       </c:if>
+                      
+                      <!-- CARDS -->
+                        <jsp:include page="WEB-INF/pages/admin/common/cards.jsp"/>
+                      <!---------------->
+                      
                       <ul>
                         <c:forEach var="product" items="${products}">
                             <li>${product.name}</li>
@@ -27,7 +32,7 @@
               </main>        
                             
               <jsp:include page="WEB-INF/pages/common/footer.jsp"/> 
-              <jsp:include page="WEB-INF/pages/admin/add_admin.jsp"/> 
+              <jsp:include page="WEB-INF/pages/admin/common/add_admin.jsp"/> 
               <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
                       integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
                       crossorigin="anonymous"></script>

@@ -1,3 +1,5 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand ms-5" href="#">Administrador</a>
@@ -13,12 +15,17 @@
             <ul class="dropdown-menu text-center px-2 navdropdow_admin" id="navdropdow_admin" aria-labelledby="navbarDropdownMenuLink">
               <li class="mb-2"><span class="nav-item fw-bold mb-5">${admin.email}</span></li>
               <li><hr class="dropdown-divider"></li>
-              <li>
-                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="fa-thin fa-plus"></i> 
-                            Agregar Admin
+              <c:if test="${admin.superUser == true}">
+                <li>
+                    <button type="submit" class="dropdown-item" 
+                        data-bs-toggle="modal" data-bs-target="#exampleModal" 
+                        data-bs-whatever="@mdo">
+                        <i class="fa-thin fa-plus"></i> 
+                        Agregar Admin
                     </button>
-              </li>
-              <li><hr class="dropdown-divider"></li>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+              </c:if>
               <li>
                 <form action="${pageContext.request.contextPath}/ServletController?action=logout" 
           method="POST">

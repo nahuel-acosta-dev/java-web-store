@@ -36,25 +36,12 @@ public class ServletController extends HttpServlet {
     /*Obtenemos los datos necesarios y los enviamos al jsp a la vez que Redirigimos*/
     private void actionDefault(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         HttpSession sesion;
 
         sesion = request.getSession();
-        List<Product> products = null;
         if (sesion.getAttribute("admin") != null) {
-            System.out.println("el resultado es el siguiente: ");
-            System.out.println(sesion.getAttribute("admin"));
-            try {
-                products = new ProductDaoJDBC().select();
-                sesion.setAttribute("products", products);
-            } catch (SQLException ex) {
-                ex.printStackTrace(System.out);
-            } finally {
-                System.out.println("products = " + products);
-                /*request.setAttribute("products", products);
-                request.getRequestDispatcher("home_admin.jsp").forward(request, response);*/
-                response.sendRedirect("home_admin.jsp");
-            }
+            response.sendRedirect("home_admin.jsp");
         } else {
             //request.getRequestDispatcher("admin.jsp").forward(request, response);
             response.sendRedirect("admin.jsp");

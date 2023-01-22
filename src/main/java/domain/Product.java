@@ -15,8 +15,10 @@ public class Product {
     private double price;
     private double compare_price; 
     private int category;
-    private int quantity; 
+    private int quantity;
+    private int sold;
     private String date;
+    private int gender;
 
     public Product() {
     }
@@ -25,7 +27,7 @@ public class Product {
         this.idProduct = idProduct;
     }
 
-    public Product(String name, String description, double price, double compare_price, int category, int quantity, String date) {
+    public Product(String name, String description, double price, double compare_price, int category, int quantity, int sold, String date, int gender) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -33,9 +35,11 @@ public class Product {
         this.category = category;
         this.quantity = quantity;
         this.date = date;
+        this.sold = sold;
+        this.gender = gender;
     }
 
-    public Product(int idProduct, String name, String description, double price, double compare_price, int category, int quantity, String date) {
+    public Product(int idProduct, String name, String description, double price, double compare_price, int category, int quantity, int sold, String date, int gender) {
         this.idProduct = idProduct;
         this.name = name;
         this.description = description;
@@ -44,6 +48,8 @@ public class Product {
         this.category = category;
         this.quantity = quantity;
         this.date = date;
+        this.sold = sold;
+        this.gender = gender;
     }
 
     public int getIdProduct() {
@@ -110,9 +116,27 @@ public class Product {
         this.date = date;
     }
 
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public int getSold() {
+        return sold;
+    }
+
+    public void setSold(int sold) {
+        this.sold = sold;
+    }
+
     @Override
     public String toString() {
-        return "Product{" + "idProduct=" + idProduct + ", name=" + name + ", description=" + description + ", price=" + price + ", compare_price=" + compare_price + ", category=" + category + ", quantity=" + quantity + ", date=" + date + '}';
+        return "Product{" + "idProduct=" + idProduct + ", name=" + name + ", description=" + description + ", price=" + price + ", compare_price=" + compare_price + ", category=" + category + ", quantity=" + quantity + ", sold=" + sold + ", date=" + date + ", gender=" + gender + '}';
     }
+    
+   
     
 }

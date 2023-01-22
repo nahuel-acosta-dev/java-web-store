@@ -18,10 +18,14 @@ import java.util.List;
  */
 public class ProductDaoJDBC {
     
-    private static final String SQL_SELECT = "SELECT id_product, name, description, price, compare_price, category, quantity, date_created" + " FROM product";
+    private static final String SQL_SELECT = "SELECT id_product, name, description, price, compare_price, category, quantity, sold, date_created, gender" + " FROM product";
 
+    private static final String SQL_SELECT_LIMIT = "SELECT id_product, name, description, price, compare_price, category, quantity, sold, date_created, gender" + " FROM product LIMIT ?, ?";
+    
+    private static final String SQL_SELECT_COUNT = "SELECT COUNT(id_product)" + " FROM product";
+    
                 
-    private static final String SQL_SELECT_BY_ID = "SELECT id_product, name, description, price, compare_price, category, quantity, date_created" + "FROM product WHERE id_product = ?";
+    private static final String SQL_SELECT_BY_ID = "SELECT id_product, name, description, price, compare_price, category, quantity, sold, date_created, gender" + "FROM product WHERE id_product = ?";
 
     private static final String SQL_INSERT = "INSERT INTO product(name, description, price, compare_price, category, quantity, date_created) "
             + " VALUES(?, ?, ?, ?, ?, ?, ?)";
@@ -50,9 +54,11 @@ public class ProductDaoJDBC {
                 double compare_price = rs.getDouble("compare_price");
                 int category = rs.getInt("category");
                 int quantity = rs.getInt("quantity");
+                int sold = rs.getInt("sold");
                 String dateCreated = rs.getString("date_created");
+                int gender = rs.getInt("gender");
 
-                product = new Product(idProduct, name, description, price, compare_price, category, quantity,dateCreated);
+                product = new Product(idProduct, name, description, price, compare_price, category, quantity, sold, dateCreated, gender);
 
                 products.add(product);
             }
@@ -65,6 +71,74 @@ public class ProductDaoJDBC {
         }
 
         return products;
+    }
+    
+    public List<Product> select_limit(int offset, int count) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Product product = null;
+        List<Product> products = new ArrayList<>();
+
+        try {
+            conn = ConnectionJDBC.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT_LIMIT);
+            stmt.setInt(1, offset);
+            stmt.setInt(2, count);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                int idProduct = rs.getInt("id_product");
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+                double price = rs.getDouble("price");
+                double compare_price = rs.getDouble("compare_price");
+                int category = rs.getInt("category");
+                int quantity = rs.getInt("quantity");
+                int sold = rs.getInt("sold");
+                String dateCreated = rs.getString("date_created");
+                int gender = rs.getInt("gender");
+
+                product = new Product(idProduct, name, description, price, compare_price, category, quantity, sold, dateCreated, gender);
+
+                products.add(product);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            ConnectionJDBC.close(rs);
+            ConnectionJDBC.close(stmt);
+            ConnectionJDBC.close(conn);
+        }
+
+        return products;
+    }
+    
+    
+    public int select_count() throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        int rows = 0;
+        
+        try {
+            conn = ConnectionJDBC.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT_COUNT);
+            rs = stmt.executeQuery();
+
+            while(rs.next()){
+                rows = rs.getInt(1);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            ConnectionJDBC.close(rs);
+            ConnectionJDBC.close(stmt);
+            ConnectionJDBC.close(conn);
+        }
+
+        return rows;
     }
 
 }

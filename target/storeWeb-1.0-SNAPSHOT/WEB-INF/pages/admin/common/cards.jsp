@@ -3,7 +3,8 @@
     <div class="col-10">
         <div class="row">
                 
-            <div class="bg-info py-14 col-3 rounded rounded-3 border border-3 border-dark">
+            <a class="bg-info py-14 col-3 rounded rounded-3 border border-3 border-dark" 
+               href="ProductsServletController">
                 <div class="container">
                    <div class="row">
                       <!-- col -->
@@ -27,7 +28,7 @@
                       </div>
                    </div>
                 </div>
-             </div>
+             </a>
 
             <div class="col-1"></div> 
             

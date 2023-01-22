@@ -23,12 +23,6 @@
                       <!-- CARDS -->
                         <jsp:include page="WEB-INF/pages/admin/common/cards.jsp"/>
                       <!---------------->
-                      
-                      <ul>
-                        <c:forEach var="product" items="${products}">
-                            <li>${product.name}</li>
-                        </c:forEach>
-                      </ul>
               </main>        
                             
               <jsp:include page="WEB-INF/pages/common/footer.jsp"/> 

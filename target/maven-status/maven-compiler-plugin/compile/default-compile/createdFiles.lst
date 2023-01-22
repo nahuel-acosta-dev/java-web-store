@@ -1,11 +1,13 @@
 data\ProductDao.class
 data\AdminDaoJDBC.class
+domain\SessionProducts.class
 web\StoreServlet.class
 web\ServletController.class
 data\ConnectionJDBC.class
 domain\Admin.class
 domain\Category.class
 com\nahuel\dev\storeWeb\resources\JavaEE8Resource.class
+web\ProductsServletController.class
 com\nahuel\dev\storeWeb\JAXRSConfiguration.class
 data\AdminDao.class
 data\ProductDaoJDBC.class

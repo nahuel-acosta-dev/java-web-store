@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author Nahuel
  */
-public class ProductDaoJDBC {
+public class ProductDaoJDBC implements ProductDao {
     
     private static final String SQL_SELECT = "SELECT id_product, name, description, price, compare_price, category, quantity, sold, date_created, gender" + " FROM product";
 
@@ -25,10 +25,9 @@ public class ProductDaoJDBC {
     private static final String SQL_SELECT_COUNT = "SELECT COUNT(id_product)" + " FROM product";
     
                 
-    private static final String SQL_SELECT_BY_ID = "SELECT id_product, name, description, price, compare_price, category, quantity, sold, date_created, gender" + "FROM product WHERE id_product = ?";
+    private static final String SQL_SELECT_BY_ID = "SELECT id_product, name, description, price, compare_price, category, quantity, sold, date_created, gender " + " FROM product WHERE id_product = ?";
 
-    private static final String SQL_INSERT = "INSERT INTO product(name, description, price, compare_price, category, quantity, date_created) "
-            + " VALUES(?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO product(name, description, price, compare_price, category, quantity, date_created) " + " VALUES(?, ?, ?, ?, ?, ?, ?)";
 
     private static final String SQL_UPDATE = "UPDATE product "
             + " SET name=?, description = ?, price = ?, compare_price = ?, category = ?, quantity = ? WHERE id_product=?";
@@ -139,6 +138,66 @@ public class ProductDaoJDBC {
         }
 
         return rows;
+    }
+    
+    public Product select_by_id(Product product) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = ConnectionJDBC.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT_BY_ID);
+            stmt.setInt(1, product.getIdProduct());
+            rs = stmt.executeQuery();
+            //rs.absolute(1);//nos posicionamos en el primer registro
+            
+            
+            while(rs.next()){
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+                double price = rs.getDouble("price");
+                double comparePrice = rs.getDouble("compare_price");
+                int category = rs.getInt("category");
+                int quantity = rs.getInt("quantity");
+                int sold = rs.getInt("sold");
+                String dateCreated = rs.getString("date_created");
+                int gender = rs.getInt("gender");
+                
+                product.setName(name);
+                product.setDescription(description);
+                product.setPrice(price);
+                product.setComparePrice(comparePrice);
+                product.setCategory(category);
+                product.setQuantity(quantity);
+                product.setSold(sold);
+                product.setDateCreated(dateCreated);
+                product.setGender(gender);
+            }
+
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+            System.out.println("ERROR EN PRODUCT DAO");
+        } finally {
+            ConnectionJDBC.close(rs);
+            ConnectionJDBC.close(stmt);
+            ConnectionJDBC.close(conn);
+        }
+        
+        return product;
+    }
+    
+    public int insert(Product product){
+        return 0;
+    }
+    
+    public int update(Product product){
+        return 0;
+    }
+    
+    public int delete(Product product){
+        return 0;
     }
 
 }

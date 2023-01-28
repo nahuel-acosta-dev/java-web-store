@@ -8,32 +8,31 @@ package domain;
  *
  * @author Nahuel
  */
-public class Category {
-    private int idCategory;
+public class Gender {
+    private int idGender;
     private String name;
+    
+    public Gender(){}
 
-    public Category() {
+    public Gender(int idGender) {
+        this.idGender = idGender;
     }
 
-    public Category(int idCategory) {
-        this.idCategory = idCategory;
-    }
-
-    public Category(String name) {
+    public Gender(String name) {
         this.name = name;
     }
 
-    public Category(int idCategory, String name) {
-        this.idCategory = idCategory;
+    public Gender(int idGender, String name) {
+        this.idGender = idGender;
         this.name = name;
     }
 
-    public int getIdCategory() {
-        return idCategory;
+    public int getIdGender() {
+        return idGender;
     }
 
-    public void setIdCategory(int idCategory) {
-        this.idCategory = idCategory;
+    public void setIdGender(int idGender) {
+        this.idGender = idGender;
     }
 
     public String getName() {
@@ -46,7 +45,7 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Category{" + "idCategory=" + idCategory + ", name=" + name + '}';
+        return "Gender{" + "idGender=" + idGender + ", name=" + name + '}';
     }
     
 }

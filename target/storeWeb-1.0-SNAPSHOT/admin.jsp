@@ -21,8 +21,8 @@
                              ">
 
                                 <span class="text-warning text-uppercase fs-4 fw-normal" role="alert">
-                                        <c:if test="${sessionScope['msje'] != null}">
-                                            ${sessionScope['msje']}
+                                        <c:if test="${sessionScope['msje_err'] != null}">
+                                            ${sessionScope['msje_err']}
                                         </c:if>
                                 </span>
 

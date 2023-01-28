@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface ProductDao {
     public List<Product> select() throws SQLException;
+    public List<Product> select_limit(int offset, int count) throws SQLException;
+    public int select_count() throws SQLException;
     public Product select_by_id(Product product) throws SQLException;
     public int insert(Product product) throws SQLException;
     public int update(Product product) throws SQLException;

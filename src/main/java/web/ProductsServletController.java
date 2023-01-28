@@ -4,7 +4,9 @@
  */
 package web;
 
+import data.CategoryDaoJDBC;
 import data.ProductDaoJDBC;
+import domain.Category;
 import domain.Product;
 import domain.SessionProducts;
 import java.io.IOException;
@@ -30,7 +32,19 @@ public class ProductsServletController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //response.sendRedirect("products.jsp");
-        this.actionDefault(request, response);
+        String action = request.getParameter("action");
+        
+        if (action != null) {
+            switch (action) {
+                case "editar":
+                this.editProduct(request, response);
+                break;
+                default:
+                    this.actionDefault(request, response);
+            }
+        } else{
+            this.actionDefault(request, response);
+        }
     }
     
     
@@ -39,67 +53,107 @@ public class ProductsServletController extends HttpServlet {
         
         HttpSession sesion;
         sesion = request.getSession();
-        List<Product> products = null;
         
         if (sesion.getAttribute("admin") != null) {
+            
+           boolean resultPagination = this.pagination(request, response);
            
-            try {
-                
-                int offsett = 0; //posicion del primer registro de products a mostrar
-                int count = 2; //posicion del ultimo registro de products a mostrar
-                
-                int currentPage = 1; //pagina actual de la paginacion
-                int recordsPerPage = count; //cantidad de registros a mostrar
-                
-                
-                //obtenemos la pagina de paginacion a mostrar
-                String pagination = request.getParameter("pagination");
-                
-                if (pagination != null && Integer.parseInt(pagination) > 1) {
-                    
-                    System.out.println("LA PAGINA ES: " + pagination);
-                    int productsPage = (Integer.parseInt(pagination) * recordsPerPage);
-                    offsett = productsPage - recordsPerPage;
-                    
-                } 
-                
-                if(offsett > 1){
-                    currentPage = Integer.parseInt(pagination);
-                }
-                
-                System.out.println(sesion.getAttribute("admin"));
-                
-                int paginationSections = (int) Math.ceil((double) (countProducts()) / recordsPerPage);
-                
-                System.out.println("MINIMO DE PRODUCTOS: " + offsett);
-                System.out.println("LIMITE DE PRODUCTOS: " + count);
-
-                products = new ProductDaoJDBC().select_limit(offsett, count);
-                
-                SessionProducts sessionProducts = new SessionProducts(products, paginationSections);
-                
-                sesion.setAttribute("sessionProducts", sessionProducts);
-                
-                sesion.setAttribute("currentPage", currentPage);
-                
-            } catch (SQLException ex) {
-                ex.printStackTrace(System.out);
-            } finally {
-                System.out.println("products = " + products);
-                response.sendRedirect("pages/products.jsp");
-            }
+           if(resultPagination == false){
+               sesion.setAttribute("msje_err_products", "Error al cargar productos");
+           }
+           else{
+               sesion.setAttribute("msje_err_products", null);
+           }
+           //response.sendRedirect("pages/products.jsp");
+           request.getRequestDispatcher("pages/products.jsp").forward(request, response);
         } else {
             response.sendRedirect("admin.jsp");
         }
         
     }
     
+    /*********** EDITAR PRODUCTO **************/
+    
+    private void editProduct(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException{
+
+        
+        
+        try {
+            int idProduct = Integer.parseInt(request.getParameter("idProduct"));
+            Product product = new ProductDaoJDBC().select_by_id(new Product(idProduct));
+            List<Category> categories = new CategoryDaoJDBC().select();
+            System.out.println("ESTAS SON MIS CATEGORIAS: " + categories);
+            
+            request.setAttribute("categories", categories);
+            request.setAttribute("product", product);
+            
+            String jspEdit = "pages/edit_product.jsp";
+            request.getRequestDispatcher(jspEdit).forward(request, response);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+            String jspEdit = "pages/edit_product.jsp";
+            request.getRequestDispatcher(jspEdit).forward(request, response);
+        }
+    }
+    
+    /*************************/
     
     /*********** PAGINATION PRODUCTOS **************/
     
-    private void pagination (HttpServletRequest request, HttpServletResponse response)
+    private boolean pagination (HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException{
         
+        HttpSession sesion;
+        sesion = request.getSession();
+        List<Product> products = null;
+
+        try {
+            
+            
+            int offsett = 0; //posicion del primer registro de products a mostrar
+            int count = 2; //posicion del ultimo registro de products a mostrar
+            
+            int currentPage = 1; //pagina actual de la paginacion
+            int recordsPerPage = count; //cantidad de registros a mostrar
+            
+            
+            //obtenemos la pagina de paginacion a mostrar
+            String pagination = request.getParameter("pagination");
+            
+            if (pagination != null && Integer.parseInt(pagination) > 1) {
+                
+                System.out.println("LA PAGINA ES: " + pagination);
+                int productsPage = (Integer.parseInt(pagination) * recordsPerPage);
+                offsett = productsPage - recordsPerPage;
+                
+            }
+            
+            if(offsett > 1){
+                currentPage = Integer.parseInt(pagination);
+            }
+            
+            System.out.println(sesion.getAttribute("admin"));
+            
+            /*Obtenemos la cantidad de productos a mostrar el numero de productos que tenemos por
+            la cantidad de productos que queremos mostrar*/
+            int paginationSections = (int) Math.ceil((double) (countProducts()) / recordsPerPage);
+            
+            products = new ProductDaoJDBC().select_limit(offsett, count);
+            
+            SessionProducts sessionProducts = new SessionProducts(products, paginationSections);
+            
+            sesion.setAttribute("sessionProducts", sessionProducts);
+            
+            sesion.setAttribute("currentPage", currentPage);
+            
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+            sesion.setAttribute("sessionProducts", null);
+            sesion.setAttribute("currentPage", null);
+            return false;
+        }
     }
     
     /*************************/
@@ -121,6 +175,7 @@ public class ProductsServletController extends HttpServlet {
     }
     
     /*************************/
+    
     
     
 }

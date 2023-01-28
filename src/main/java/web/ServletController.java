@@ -104,14 +104,14 @@ public class ServletController extends HttpServlet {
                 /*request.setAttribute("msje",
                         "Error al intentar iniciar sesion, revise sus credenciales.");*/
                 
-                sesion.setAttribute("msje",
+                sesion.setAttribute("msje_err",
                         "Error al intentar iniciar sesion, revise sus credenciales.");
             }
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
             /*request.setAttribute("msje",
                     "Error al intentar iniciar sesion");*/
-            sesion.setAttribute("msje",
+            sesion.setAttribute("msje_err",
                     "Error al intentar iniciar sesion");
         }
         finally{

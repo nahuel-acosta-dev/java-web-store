@@ -15,8 +15,13 @@ body{
     padding-left: 20px;
     
 }
-.main{
-    height: 96vh;
+main{
+    min-height: 100vh;
 }
+
+.cont-form-product{
+    height: 90vh!important;
+}
+
 /******************************/
 

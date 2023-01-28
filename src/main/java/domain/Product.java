@@ -13,11 +13,11 @@ public class Product {
     private String name;
     private String description;
     private double price;
-    private double compare_price; 
+    private double comparePrice; 
     private int category;
     private int quantity;
     private int sold;
-    private String date;
+    private String dateCreated;
     private int gender;
 
     public Product() {
@@ -27,27 +27,27 @@ public class Product {
         this.idProduct = idProduct;
     }
 
-    public Product(String name, String description, double price, double compare_price, int category, int quantity, int sold, String date, int gender) {
+    public Product(String name, String description, double price, double comparePrice, int category, int quantity, int sold, String dateCreated, int gender) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.compare_price = compare_price;
+        this.comparePrice = comparePrice;
         this.category = category;
         this.quantity = quantity;
-        this.date = date;
+        this.dateCreated = dateCreated;
         this.sold = sold;
         this.gender = gender;
     }
 
-    public Product(int idProduct, String name, String description, double price, double compare_price, int category, int quantity, int sold, String date, int gender) {
+    public Product(int idProduct, String name, String description, double price, double comparePrice, int category, int quantity, int sold, String dateCreated, int gender) {
         this.idProduct = idProduct;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.compare_price = compare_price;
+        this.comparePrice = comparePrice;
         this.category = category;
         this.quantity = quantity;
-        this.date = date;
+        this.dateCreated = dateCreated;
         this.sold = sold;
         this.gender = gender;
     }
@@ -84,12 +84,12 @@ public class Product {
         this.price = price;
     }
 
-    public double getCompare_price() {
-        return compare_price;
+    public double getComparePrice() {
+        return comparePrice;
     }
 
-    public void setCompare_price(double compare_price) {
-        this.compare_price = compare_price;
+    public void setComparePrice(double comparePrice) {
+        this.comparePrice = comparePrice;
     }
 
     public int getCategory() {
@@ -108,20 +108,12 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public String getDate() {
-        return date;
+    public String getDateCreated() {
+        return dateCreated;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public int getGender() {
-        return gender;
-    }
-
-    public void setGender(int gender) {
-        this.gender = gender;
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public int getSold() {
@@ -132,9 +124,18 @@ public class Product {
         this.sold = sold;
     }
 
+    
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+    
     @Override
     public String toString() {
-        return "Product{" + "idProduct=" + idProduct + ", name=" + name + ", description=" + description + ", price=" + price + ", compare_price=" + compare_price + ", category=" + category + ", quantity=" + quantity + ", sold=" + sold + ", date=" + date + ", gender=" + gender + '}';
+        return "Product{" + "idProduct=" + idProduct + ", name=" + name + ", description=" + description + ", price=" + price + ", comparePrice=" + comparePrice + ", category=" + category + ", quantity=" + quantity + ", sold=" + sold + ", dateCreated=" + dateCreated + ", gender=" + gender + '}';
     }
     
    

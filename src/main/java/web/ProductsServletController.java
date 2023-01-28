@@ -5,8 +5,10 @@
 package web;
 
 import data.CategoryDaoJDBC;
+import data.GenderDaoJDBC;
 import data.ProductDaoJDBC;
 import domain.Category;
+import domain.Gender;
 import domain.Product;
 import domain.SessionProducts;
 import java.io.IOException;
@@ -83,9 +85,11 @@ public class ProductsServletController extends HttpServlet {
             int idProduct = Integer.parseInt(request.getParameter("idProduct"));
             Product product = new ProductDaoJDBC().select_by_id(new Product(idProduct));
             List<Category> categories = new CategoryDaoJDBC().select();
+            List<Gender> genders = new GenderDaoJDBC().select();
             System.out.println("ESTAS SON MIS CATEGORIAS: " + categories);
             
             request.setAttribute("categories", categories);
+            request.setAttribute("genders", genders);
             request.setAttribute("product", product);
             
             String jspEdit = "pages/edit_product.jsp";

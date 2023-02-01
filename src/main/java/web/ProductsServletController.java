@@ -13,6 +13,8 @@ import domain.Product;
 import domain.SessionProducts;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,15 +71,15 @@ public class ProductsServletController extends HttpServlet {
            else{
                sesion.setAttribute("msje_err_products", null);
            }
-           request.getRequestDispatcher("pages/products.jsp").forward(request, response);
-           //response.sendRedirect("pages/products.jsp");
+           //request.getRequestDispatcher("pages/products.jsp").forward(request, response);
+           response.sendRedirect("pages/products.jsp");
         } else {
             response.sendRedirect("admin.jsp");
         }
         
     }
     
-    /*********** EDITAR PRODUCTO **************/
+    /*********** REDIRIGIR EDITAR PRODUCTO **************/
     
     private void editProduct(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException{
@@ -104,7 +106,7 @@ public class ProductsServletController extends HttpServlet {
     
     /*************************/
     
-    /*********** AGREGAR PRODUCTO **************/
+    /*********** REDIRIGIR A AGREGAR PRODUCTO **************/
     
     private void addProduct(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException{
@@ -217,6 +219,9 @@ public class ProductsServletController extends HttpServlet {
                 case "modify":
                     this.modifyClient(request, response);
                     break;
+                case "add_product":
+                    this.insertProduct(request, response);
+                    break;
                 default:
                     this.actionDefault(request, response);
             }
@@ -225,6 +230,8 @@ public class ProductsServletController extends HttpServlet {
         }
     }
     
+    
+    /*********** MODIFICAR PRODUCTO **************/
     private void modifyClient(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
     //obtenemos valores del formulario edit_product
@@ -249,6 +256,43 @@ public class ProductsServletController extends HttpServlet {
         this.actionDefault(request, response);
         
     }
+    
+    /*************************/
+    
+    
+    /*********** INSERTANDO NUEVO PRODUCTO **************/
+    
+    
+    private void insertProduct(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    //obtenemos valores del formulario edit_product
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        Double price = (Double) Double.parseDouble(request.getParameter("price")); 
+        Double comparePrice = (Double) Double.parseDouble(request.getParameter("comparePrice"));
+        int sold = (int) Integer.parseInt(request.getParameter("sold"));
+        int quantity = (int) Integer.parseInt(request.getParameter("quantity"));
+        int category = (int) Integer.parseInt(request.getParameter("category"));
+        int gender = (int) Integer.parseInt(request.getParameter("gender"));
+        
+        /***OBTENER FECHA Y HORA***/
+        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm:ss");
+        String date = dtf2.format(LocalDateTime.now());
+        /********************/
+        Product product = new Product(name, description, price, comparePrice, category, 
+                quantity, sold, date, gender);
+        
+        //Modificamos el objeto en la base de datos
+        int addProduct = new ProductDaoJDBC().insert(product);
+        System.out.println("Registros agregados: " + addProduct);
+        
+        //Redirigimos
+        this.actionDefault(request, response);
+        
+    }
+    
+    
+    /*************************/
     
 }
 

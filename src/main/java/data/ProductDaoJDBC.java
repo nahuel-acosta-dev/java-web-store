@@ -27,7 +27,7 @@ public class ProductDaoJDBC implements ProductDao {
                 
     private static final String SQL_SELECT_BY_ID = "SELECT id_product, name, description, price, compare_price, category, quantity, sold, date_created, gender " + " FROM product WHERE id_product = ?";
 
-    private static final String SQL_INSERT = "INSERT INTO product(name, description, price, compare_price, category, quantity, date_created) " + " VALUES(?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO product(name, description, price, compare_price, category, quantity, sold, date_created, gender) " + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String SQL_UPDATE = "UPDATE product "
             + " SET name=?, description = ?, price = ?, compare_price = ?, category = ?, quantity = ?, sold = ?, gender = ? WHERE id_product=?";
@@ -189,7 +189,32 @@ public class ProductDaoJDBC implements ProductDao {
     }
     
     public int insert(Product product){
-        return 0;
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+            conn = ConnectionJDBC.getConnection();
+            stmt = conn.prepareStatement(SQL_INSERT);
+            stmt.setString(1, product.getName());
+            stmt.setString(2, product.getDescription());
+            stmt.setDouble(3, product.getPrice());
+            stmt.setDouble(4, product.getComparePrice());
+            stmt.setInt(5, product.getCategory());
+            stmt.setInt(6, product.getQuantity());
+            stmt.setInt(7, product.getSold());
+            stmt.setString(8, product.getDateCreated());
+            stmt.setInt(9, product.getGender());
+            
+            rows = stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            ConnectionJDBC.close(stmt);
+            ConnectionJDBC.close(conn);
+        }
+
+        return rows;
     }
     
     public int update(Product product){

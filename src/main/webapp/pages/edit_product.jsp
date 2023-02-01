@@ -12,42 +12,44 @@
         </header>
         <body>
                 <main>
-                    <jsp:include page="../WEB-INF/pages/common/navigation_buttons.jsp"/> 
                     <div class="container mb-5 cont-form-product">
-                        <form class="row g-3">
+                        <form class="row g-3" method="POST" action="${
+                              pageContext.request.contextPath
+                                  }/ProductsServletController?action=modify&idProduct=${product.getIdProduct()}">
+                            <jsp:include page="../WEB-INF/pages/common/navigation_buttons.jsp"/> 
                             <div class="col-md-6">
                                 <label for="inputName" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" 
+                                <input type="text" class="form-control" maxlength="200"
                                        id="inputName" value="${product.getName()}"
-                                       name="name">
+                                       name="name" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputPrice" class="form-label">Precio</label>
                                 <input type="number" class="form-control" id="inputPrice" 
                                        min="1" max="900000" value="${product.getPrice()}"
-                                       name="price">
+                                       name="price" required step="any">
                             </div>
                             <div class="col-md-6">
                                 <label for="inputComparePrice" class="form-label">Precio Anterior</label>
-                                <input type="number" class="form-control" 
-                                       id="inputComparePrice" min="1" name="comparePrice"
-                                       max="900000" value="${product.getComparePrice()}">
+                                <input type="number" class="form-control" id="inputComparePrice"
+                                       min="1" name="comparePrice"max="900000" required step="any"
+                                       value="${product.getComparePrice()}">
                             </div>
                             <div class="col-md-6">
                                 <label for="inputSold" class="form-label">Vendidos</label>
                                 <input type="number" class="form-control" 
-                                       id="inputSold" min="1" name="sold"
+                                       id="inputSold" min="0" name="sold" required
                                        max="900000" value="${product.getSold()}">
                             </div>
                             <div class="col-md-6">
                                 <label for="inputQuantity" class="form-label">Stock</label>
                                 <input type="number" class="form-control" id="inputQuantity" 
-                                       min="0" max="100000" value="${product.getQuantity()}"
+                                       min="0" max="100000" value="${product.getQuantity()}" required
                                        name="quantity">
                             </div>
                             <div class="col-md-4">
                                 <label for="inputCategory" class="form-label">Categoria</label>
-                                <select id="inputCategory" class="form-select" name="category">
+                                <select id="inputCategory" class="form-select" name="category" required>
                                     <c:forEach var="category" items="${categories}">
                                         <c:choose>
                                             <c:when test="${product.getCategory() == category.getIdCategory()}">
@@ -78,7 +80,7 @@
                             </div>
                             <div class="col-md-2">
                                 <label for="inputGender" class="form-label">Genero</label>
-                                <select id="inputGender" class="form-select" name="gender">
+                                <select id="inputGender" class="form-select" name="gender" required>
                                     <c:forEach var="gender" items="${genders}">
                                         <c:choose>
                                             <c:when test="${product.getGender() == gender.getIdGender()}">
@@ -110,14 +112,13 @@
                                         Descripcion
                                 </label>
                                     <textarea class="form-control text-start" 
-                                              id="exampleFormControlTextarea1" 
-                                              rows="3"
-                                              name="description" 
-                                              value="${product.getDescription()}"
-                                              >${product.getDescription()}.</textarea>
-                            </div>
-                            <div class="col-12">
-                                    <button type="submit" class="btn btn-primary">Sign in</button>
+                                        id="exampleFormControlTextarea1" 
+                                        rows="3"
+                                        name="description" 
+                                        maxlength="500"
+                                        required
+                                        value="${product.getDescription()}"
+                                        >${product.getDescription()}.</textarea>
                             </div>
                         </form>  
                     </div>

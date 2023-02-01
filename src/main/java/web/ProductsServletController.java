@@ -38,9 +38,12 @@ public class ProductsServletController extends HttpServlet {
         
         if (action != null) {
             switch (action) {
-                case "editar":
-                this.editProduct(request, response);
-                break;
+                case "edit":
+                    this.editProduct(request, response);
+                    break;
+                case "add":
+                    this.addProduct(request, response);
+                    break;
                 default:
                     this.actionDefault(request, response);
             }
@@ -66,8 +69,8 @@ public class ProductsServletController extends HttpServlet {
            else{
                sesion.setAttribute("msje_err_products", null);
            }
-           //response.sendRedirect("pages/products.jsp");
            request.getRequestDispatcher("pages/products.jsp").forward(request, response);
+           //response.sendRedirect("pages/products.jsp");
         } else {
             response.sendRedirect("admin.jsp");
         }
@@ -79,8 +82,6 @@ public class ProductsServletController extends HttpServlet {
     private void editProduct(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException{
 
-        
-        
         try {
             int idProduct = Integer.parseInt(request.getParameter("idProduct"));
             Product product = new ProductDaoJDBC().select_by_id(new Product(idProduct));
@@ -97,6 +98,29 @@ public class ProductsServletController extends HttpServlet {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
             String jspEdit = "pages/edit_product.jsp";
+            request.getRequestDispatcher(jspEdit).forward(request, response);
+        }
+    }
+    
+    /*************************/
+    
+    /*********** AGREGAR PRODUCTO **************/
+    
+    private void addProduct(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException{
+
+        try {
+            List<Category> categories = new CategoryDaoJDBC().select();
+            List<Gender> genders = new GenderDaoJDBC().select();
+            
+            request.setAttribute("categories", categories);
+            request.setAttribute("genders", genders);
+            
+            String jspEdit = "pages/add_product.jsp";
+            request.getRequestDispatcher(jspEdit).forward(request, response);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+            String jspEdit = "pages/add_product.jsp";
             request.getRequestDispatcher(jspEdit).forward(request, response);
         }
     }
@@ -148,9 +172,10 @@ public class ProductsServletController extends HttpServlet {
             SessionProducts sessionProducts = new SessionProducts(products, paginationSections);
             
             sesion.setAttribute("sessionProducts", sessionProducts);
+            //request.setAttribute("sessionProducts", sessionProducts);
             
             sesion.setAttribute("currentPage", currentPage);
-            
+            //request.setAttribute("currentPage", currentPage);
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
@@ -181,6 +206,49 @@ public class ProductsServletController extends HttpServlet {
     /*************************/
     
     
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    
+        String action = request.getParameter("action");
+        
+        if (action != null) {
+            switch (action) {
+                case "modify":
+                    this.modifyClient(request, response);
+                    break;
+                default:
+                    this.actionDefault(request, response);
+            }
+        } else{
+            this.actionDefault(request, response);
+        }
+    }
+    
+    private void modifyClient(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    //obtenemos valores del formulario edit_product
+        int idProduct = (int) Integer.parseInt(request.getParameter("idProduct"));
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        Double price = (Double) Double.parseDouble(request.getParameter("price")); 
+        Double comparePrice = (Double) Double.parseDouble(request.getParameter("comparePrice"));
+        int sold = (int) Integer.parseInt(request.getParameter("sold"));
+        int quantity = (int) Integer.parseInt(request.getParameter("quantity"));
+        int category = (int) Integer.parseInt(request.getParameter("category"));
+        int gender = (int) Integer.parseInt(request.getParameter("gender"));
+        
+        Product product = new Product(idProduct ,name, description, price, comparePrice, category, 
+                quantity, sold, gender);
+        
+        //Modificamos el objeto en la base de datos
+        int modifiedRecords = new ProductDaoJDBC().update(product);
+        System.out.println("Registros Modificados: " + modifiedRecords);
+        
+        //Redirigimos
+        this.actionDefault(request, response);
+        
+    }
     
 }
 

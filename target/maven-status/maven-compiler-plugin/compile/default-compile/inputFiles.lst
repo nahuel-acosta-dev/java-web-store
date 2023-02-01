@@ -5,10 +5,15 @@ F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\data\ProductDaoJDBC
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\data\ProductDao.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\data\ConnectionJDBC.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\domain\Product.java
+F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\data\CategoryDao.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\domain\Admin.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\domain\SessionProducts.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\domain\Category.java
+F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\domain\Gender.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\com\nahuel\dev\storeWeb\resources\JavaEE8Resource.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\data\AdminDao.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\web\ProductsServletController.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\web\ServletController.java
+F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\data\CategoryDaoJDBC.java
+F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\data\GenderDao.java
+F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\data\GenderDaoJDBC.java

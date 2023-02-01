@@ -1,4 +1,6 @@
+data\CategoryDao.class
 data\ProductDao.class
+data\CategoryDaoJDBC.class
 data\AdminDaoJDBC.class
 domain\SessionProducts.class
 web\StoreServlet.class
@@ -6,7 +8,10 @@ web\ServletController.class
 data\ConnectionJDBC.class
 domain\Admin.class
 domain\Category.class
+data\GenderDao.class
 com\nahuel\dev\storeWeb\resources\JavaEE8Resource.class
+domain\Gender.class
+data\GenderDaoJDBC.class
 web\ProductsServletController.class
 com\nahuel\dev\storeWeb\JAXRSConfiguration.class
 data\AdminDao.class

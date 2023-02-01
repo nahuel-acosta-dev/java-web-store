@@ -30,7 +30,7 @@ public class ProductDaoJDBC implements ProductDao {
     private static final String SQL_INSERT = "INSERT INTO product(name, description, price, compare_price, category, quantity, date_created) " + " VALUES(?, ?, ?, ?, ?, ?, ?)";
 
     private static final String SQL_UPDATE = "UPDATE product "
-            + " SET name=?, description = ?, price = ?, compare_price = ?, category = ?, quantity = ? WHERE id_product=?";
+            + " SET name=?, description = ?, price = ?, compare_price = ?, category = ?, quantity = ?, sold = ?, gender = ? WHERE id_product=?";
 
     private static final String SQL_DELETE = "DELETE FROM product WHERE id_product = ?";
     
@@ -193,7 +193,41 @@ public class ProductDaoJDBC implements ProductDao {
     }
     
     public int update(Product product){
-        return 0;
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        
+        System.out.println("ESTE ES EL PRODUCTO: " + product
+        );
+        
+        try {
+            conn = ConnectionJDBC.getConnection();
+            stmt = conn.prepareStatement(SQL_UPDATE);
+            stmt.setString(1, product.getName());
+            stmt.setString(2, product.getDescription());
+            stmt.setDouble(3, product.getPrice());
+            stmt.setDouble(4, product.getComparePrice());
+            stmt.setInt(5, product.getCategory());
+            stmt.setInt(6, product.getQuantity());
+            stmt.setInt(7, product.getSold());
+            stmt.setInt(8, product.getGender());
+            stmt.setInt(9, product.getIdProduct());
+            
+            rows = stmt.executeUpdate();
+            
+            System.out.println("EXITO AL ACTUALIZAR PRODUCTO");
+            System.out.println(rows);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+            System.out.println("FALLO AL ACTUALIZAR PRODUCTO");
+        } finally {
+            ConnectionJDBC.close(stmt);
+            ConnectionJDBC.close(conn);
+        }
+
+        return rows;
+        
     }
     
     public int delete(Product product){

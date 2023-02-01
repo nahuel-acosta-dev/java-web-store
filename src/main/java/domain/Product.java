@@ -26,6 +26,18 @@ public class Product {
     public Product(int idProduct) {
         this.idProduct = idProduct;
     }
+    
+    public Product(int idProduct ,String name, String description, double price, double comparePrice, int category, int quantity, int sold,  int gender) {
+        this.idProduct = idProduct;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.comparePrice = comparePrice;
+        this.category = category;
+        this.quantity = quantity;
+        this.sold = sold;
+        this.gender = gender;
+    }
 
     public Product(String name, String description, double price, double comparePrice, int category, int quantity, int sold, String dateCreated, int gender) {
         this.name = name;

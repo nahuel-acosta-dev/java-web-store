@@ -23,13 +23,13 @@
             <div class="row">
               <div class="col">
                 <a class="btn btn-primary btn-sm" href="${
-                        pageContext.request.contextPath}/ProductsServletController?action=editar&idProduct=${
+                        pageContext.request.contextPath}/ProductsServletController?action=edit&idProduct=${
                             product.idProduct}"
                         >Editar</a>
               </div>
               <div class="col">
                 <a class="btn btn-danger btn-sm" href="${
-                        pageContext.request.contextPath}/ProductsServletController?action=eliminar&idProduct=${
+                        pageContext.request.contextPath}/ProductsServletController?action=delete&idProduct=${
                             product.idProduct}">Eliminar</a>
               </div>
             </div>

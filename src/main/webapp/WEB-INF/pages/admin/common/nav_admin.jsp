@@ -17,7 +17,7 @@
               <li><hr class="dropdown-divider"></li>
               <c:if test="${admin.superUser == true}">
                 <li>
-                    <button type="submit" class="dropdown-item" 
+                    <button type="button" class="dropdown-item" 
                         data-bs-toggle="modal" data-bs-target="#exampleModal" 
                         data-bs-whatever="@mdo">
                         <i class="fa-thin fa-plus"></i> 

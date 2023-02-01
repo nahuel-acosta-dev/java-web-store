@@ -18,11 +18,24 @@
           <main>
                   <p class="text-center">MIS PRODUCTOS</p>
                   
+                <div class="container mt-3 mb-5">
+                  <div class="row">
+                        <div>
+                            <a class="btn btn-primary" href="${
+                        pageContext.request.contextPath}/ProductsServletController?action=add">
+                                <i class="fa-thin fa-plus"></i> Agregar Producto
+                            </a>
+                        </div>
+                  </div>
+                </div>
+                    
+                  
                   <!-- table -->
                     <jsp:include page="../WEB-INF/pages/admin/common/table.jsp"/> 
                   <!-- -------- -->
                   <!-- pagination -->
                  <div class="container mt-3">
+                    
                     <div class="row justify-content-center">
                         <div class="col"></div>
                         <div class="col d-flex justify-content-center">
@@ -31,7 +44,6 @@
                         <div class="col"></div>
                     </div>
                   </div>
-                    
                   <!-- -------- -->
           </main>        
 

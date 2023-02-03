@@ -5,10 +5,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 /* 
     Created on : 9 ene. 2023, 20:58:36
     Author     : Nahuel
-*/
+*//*
 
 .navdropdow_admin{
     max-width: 13rem !important;
     word-wrap: break-word !important;
     font-size: .9rem;
 }
+
+body{
+    padding-left: 0px!important;
+    max-width: 99vw;
+}*/

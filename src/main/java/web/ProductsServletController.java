@@ -46,6 +46,9 @@ public class ProductsServletController extends HttpServlet {
                 case "add":
                     this.addProduct(request, response);
                     break;
+                case "delete":
+                    this.deleteProduct(request, response);
+                    break;
                 default:
                     this.actionDefault(request, response);
             }
@@ -71,8 +74,8 @@ public class ProductsServletController extends HttpServlet {
            else{
                sesion.setAttribute("msje_err_products", null);
            }
-           //request.getRequestDispatcher("pages/products.jsp").forward(request, response);
-           response.sendRedirect("pages/products.jsp");
+           //request.getRequestDispatcher("products.jsp").forward(request, response);
+           response.sendRedirect("products.jsp");
         } else {
             response.sendRedirect("admin.jsp");
         }
@@ -95,11 +98,11 @@ public class ProductsServletController extends HttpServlet {
             request.setAttribute("genders", genders);
             request.setAttribute("product", product);
             
-            String jspEdit = "pages/edit_product.jsp";
+            String jspEdit = "edit_product.jsp";
             request.getRequestDispatcher(jspEdit).forward(request, response);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
-            String jspEdit = "pages/edit_product.jsp";
+            String jspEdit = "edit_product.jsp";
             request.getRequestDispatcher(jspEdit).forward(request, response);
         }
     }
@@ -118,11 +121,11 @@ public class ProductsServletController extends HttpServlet {
             request.setAttribute("categories", categories);
             request.setAttribute("genders", genders);
             
-            String jspEdit = "pages/add_product.jsp";
+            String jspEdit = "add_product.jsp";
             request.getRequestDispatcher(jspEdit).forward(request, response);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
-            String jspEdit = "pages/add_product.jsp";
+            String jspEdit = "add_product.jsp";
             request.getRequestDispatcher(jspEdit).forward(request, response);
         }
     }
@@ -208,6 +211,30 @@ public class ProductsServletController extends HttpServlet {
     /*************************/
     
     
+    /*********** ELIMINAR PRODUCTO **************/
+    
+     private void deleteProduct(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    //obtenemos valores del formulario edit_product
+        int idProduct = (int) Integer.parseInt(request.getParameter("idProduct"));
+
+        Product product = new Product(idProduct);
+        
+        //Modificamos el objeto en la base de datos
+        int result;
+        try {
+            result = new ProductDaoJDBC().delete(product);
+            
+            System.out.println("RESULTADO DE DELETE: " + result);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+        //Redirigimos
+        this.actionDefault(request, response);
+    }
+    /*************************/
+    
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -217,7 +244,7 @@ public class ProductsServletController extends HttpServlet {
         if (action != null) {
             switch (action) {
                 case "modify":
-                    this.modifyClient(request, response);
+                    this.modifyProduct(request, response);
                     break;
                 case "add_product":
                     this.insertProduct(request, response);
@@ -232,7 +259,7 @@ public class ProductsServletController extends HttpServlet {
     
     
     /*********** MODIFICAR PRODUCTO **************/
-    private void modifyClient(HttpServletRequest request, HttpServletResponse response)
+    private void modifyProduct(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
     //obtenemos valores del formulario edit_product
         int idProduct = (int) Integer.parseInt(request.getParameter("idProduct"));
@@ -293,6 +320,5 @@ public class ProductsServletController extends HttpServlet {
     
     
     /*************************/
-    
-}
 
+}

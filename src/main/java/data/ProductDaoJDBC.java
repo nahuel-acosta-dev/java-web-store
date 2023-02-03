@@ -31,7 +31,7 @@ public class ProductDaoJDBC implements ProductDao {
 
     private static final String SQL_UPDATE = "UPDATE product "
             + " SET name=?, description = ?, price = ?, compare_price = ?, category = ?, quantity = ?, sold = ?, gender = ? WHERE id_product=?";
-
+    
     private static final String SQL_DELETE = "DELETE FROM product WHERE id_product = ?";
     
     public List<Product> select() throws SQLException {
@@ -255,8 +255,25 @@ public class ProductDaoJDBC implements ProductDao {
         
     }
     
-    public int delete(Product product){
-        return 0;
+    public int delete(Product product)throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+            conn = ConnectionJDBC.getConnection();
+            stmt = conn.prepareStatement(SQL_DELETE);
+            stmt.setInt(1, product.getIdProduct());
+
+            rows = stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            ConnectionJDBC.close(stmt);
+            ConnectionJDBC.close(conn);
+        }
+
+        return rows;
     }
 
 }

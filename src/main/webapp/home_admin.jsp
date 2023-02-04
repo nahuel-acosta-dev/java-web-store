@@ -102,29 +102,41 @@
                             <thead>
                                 <tr class="text-white">
                                     <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Invoice</th>
-                                    <th scope="col">Customer</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Comprador</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Entrega</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Detalles</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
+                                    <td>1</td>
+                                    <td>#12</td>
                                     <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
+                                    <td>Venta activa</td>
+                                    <td>Sin entregar</td>
+                                    <td>2</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="form-check-input" type="checkbox"></td>
+                                    <td>2</td>
+                                    <td>#13</td>
+                                    <td>Chris Doe</td>
+                                    <td>Venta cancelada</td>
+                                    <td>Sin entregar</td>
+                                    <td>1</td>
                                     <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
                                 </tr>
                                 <tr>
                                     <td><input class="form-check-input" type="checkbox"></td>
                                     <td>01 Jan 2045</td>
                                     <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
+                                    <td>Doe</td>
                                     <td>$123</td>
                                     <td>Paid</td>
                                     <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>

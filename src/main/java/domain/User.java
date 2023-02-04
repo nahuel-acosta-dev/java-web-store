@@ -13,7 +13,7 @@ public class User {
     private int idUser;
     private String email;
     private int phone;
-    private String firstname;
+    private String firstName;
     private String lastName;
     private String addressLine1;
     private String addressLine2;
@@ -29,10 +29,10 @@ public class User {
         this.idUser = idUser;
     }
 
-    public User(String email, int phone, String firstname, String lastName, String addressLine1, String city, String stateProvinceRegion, String zipcode, String password) {
+    public User(String email, int phone, String firstName, String lastName, String addressLine1, String city, String stateProvinceRegion, String zipcode, String password) {
         this.email = email;
         this.phone = phone;
-        this.firstname = firstname;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.addressLine1 = addressLine1;
         this.city = city;
@@ -41,10 +41,10 @@ public class User {
         this.password = password;
     }
 
-    public User(String email, int phone, String firstname, String lastName, String addressLine1, String addressLine2, String city, String stateProvinceRegion, String zipcode, String password) {
+    public User(String email, int phone, String firstName, String lastName, String addressLine1, String addressLine2, String city, String stateProvinceRegion, String zipcode, String password) {
         this.email = email;
         this.phone = phone;
-        this.firstname = firstname;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
@@ -54,11 +54,11 @@ public class User {
         this.password = password;
     }
 
-    public User(int idUser, String email, int phone, String firstname, String lastName, String addressLine1, String city, String stateProvinceRegion, String zipcode, String password) {
+    public User(int idUser, String email, int phone, String firstName, String lastName, String addressLine1, String city, String stateProvinceRegion, String zipcode, String password) {
         this.idUser = idUser;
         this.email = email;
         this.phone = phone;
-        this.firstname = firstname;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.addressLine1 = addressLine1;
         this.city = city;
@@ -67,11 +67,11 @@ public class User {
         this.password = password;
     }
 
-    public User(int idUser, String email, int phone, String firstname, String lastName, String addressLine1, String addressLine2, String city, String stateProvinceRegion, String zipcode, String password) {
+    public User(int idUser, String email, int phone, String firstName, String lastName, String addressLine1, String addressLine2, String city, String stateProvinceRegion, String zipcode, String password) {
         this.idUser = idUser;
         this.email = email;
         this.phone = phone;
-        this.firstname = firstname;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
@@ -105,12 +105,12 @@ public class User {
         this.phone = phone;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -171,7 +171,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "idUser=" + idUser + ", email=" + email + ", phone=" + phone + ", firstname=" + firstname + ", lastName=" + lastName + ", addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2 + ", city=" + city + ", stateProvinceRegion=" + stateProvinceRegion + ", zipcode=" + zipcode + ", password=" + password + '}';
+        return "User{" + "idUser=" + idUser + ", email=" + email + ", phone=" + phone + ", firstName=" + firstName + ", lastName=" + lastName + ", addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2 + ", city=" + city + ", stateProvinceRegion=" + stateProvinceRegion + ", zipcode=" + zipcode + ", password=" + password + '}';
     }
 
 }

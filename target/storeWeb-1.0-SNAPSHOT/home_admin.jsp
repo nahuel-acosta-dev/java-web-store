@@ -55,7 +55,7 @@
                             <i class="fa fa-chart-line fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Ventas del dia</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">${sessionScope['sales'].getSalesOfTheDay()}</h6>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                             <i class="fa fa-chart-bar fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Ganancias del dia</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">$ ${sessionScope['sales'].getEarningsOfTheDay()}</h6>
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                             <i class="fa fa-chart-area fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Total ventas</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">${sessionScope['sales'].getTotalSales()}</h6>
                             </div>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                             <i class="fa fa-chart-pie fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Ganancias Totales</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">$ ${sessionScope['sales'].getTotalEarnings()}</h6>
                             </div>
                         </div>
                     </div>

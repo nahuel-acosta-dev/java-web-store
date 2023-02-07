@@ -7,6 +7,7 @@ package web;
 import data.CategoryDaoJDBC;
 import data.GenderDaoJDBC;
 import data.ProductDaoJDBC;
+import data.SalesDaoJDBC;
 import domain.Category;
 import domain.Gender;
 import domain.Product;
@@ -209,6 +210,8 @@ public class ProductsServletController extends HttpServlet {
     }
     
     /*************************/
+    
+    
     
     
     /*********** ELIMINAR PRODUCTO **************/

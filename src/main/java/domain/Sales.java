@@ -45,6 +45,11 @@ public class Sales {
         this.date = date;
     }
 
+    public Sales(int product, int quantity) {
+        this.product = product;
+        this.quantity = quantity;
+    }
+    
     public int getIdSales() {
         return idSales;
     }

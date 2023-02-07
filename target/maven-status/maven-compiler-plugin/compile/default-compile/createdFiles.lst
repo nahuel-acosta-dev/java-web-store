@@ -1,5 +1,6 @@
 data\UserDao.class
 data\CategoryDao.class
+domain\SessionSales.class
 data\CategoryDaoJDBC.class
 data\AdminDaoJDBC.class
 data\SalesDaoJDBC.class

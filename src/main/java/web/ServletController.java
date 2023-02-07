@@ -1,17 +1,15 @@
 package web;
 
 import data.AdminDaoJDBC;
-import data.ProductDaoJDBC;
+import data.SalesDaoJDBC;
 import domain.Admin;
-import domain.Product;
+import domain.SessionSales;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -38,15 +36,85 @@ public class ServletController extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession sesion;
-
         sesion = request.getSession();
+
         if (sesion.getAttribute("admin") != null) {
+
+            SessionSales sessionSales = new SessionSales(
+                    this.countSalesOfDay(), this.getEntriesOfTheDay(),
+                    this.countSales(), this.getAllEntries()
+            );
+            sesion.setAttribute("sales", sessionSales);
+ 
             response.sendRedirect("home_admin.jsp");
         } else {
             //request.getRequestDispatcher("admin.jsp").forward(request, response);
             response.sendRedirect("admin.jsp");
         }
     }
+    
+    /*********** CONTAR VENTAS TOTALES **************/
+    private int countSales() {
+        //response.sendRedirect("products.jsp");
+        
+        int rows = 0;
+        
+        try {
+            rows = new SalesDaoJDBC().select_count();
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+        
+        return rows;
+    }
+    
+    /*************************/
+    
+    /*********** CONTAR VENTAS del dia **************/
+    private int countSalesOfDay() {
+        //response.sendRedirect("products.jsp");
+        
+        int rows = 0;
+        try{
+            rows = new SalesDaoJDBC().select_count_of_day();
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+        return rows;
+    }
+    
+    /*************************/
+    
+    /*********** OBTENER TODAS LAS GANANCIAS DE LAS VENTAS **************/
+    private double getAllEntries() {
+        //response.sendRedirect("products.jsp");
+        
+        double entries = 0;
+        try{
+            entries = new SalesDaoJDBC().select_all_entries();
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+        return entries;
+    }
+    
+    /*************************/
+    
+    /*********** OBTENER LAS GANANCIAS DEL DIA **************/
+    private double getEntriesOfTheDay() {
+        //response.sendRedirect("products.jsp");
+        
+        double entries = 0;
+        try{
+            entries = new SalesDaoJDBC().select_entries_of_the_day();
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+        return entries;
+    }
+    
+    /*************************/
+    
 
     /**
      * ********************************POST*****************************

@@ -3,6 +3,7 @@ package web;
 import data.AdminDaoJDBC;
 import data.SalesDaoJDBC;
 import domain.Admin;
+import domain.SalesExtends;
 import domain.SessionSales;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -37,15 +38,26 @@ public class ServletController extends HttpServlet {
         
         HttpSession sesion;
         sesion = request.getSession();
-
+        List<SalesExtends> salesRecents = null;
         if (sesion.getAttribute("admin") != null) {
-
+            
+            try{
+             salesRecents = new SalesDaoJDBC().select_max_limit(5);
+            }
+            catch (SQLException ex){
+               ex.printStackTrace(System.out);
+            }
+            
             SessionSales sessionSales = new SessionSales(
                     this.countSalesOfDay(), this.getEntriesOfTheDay(),
                     this.countSales(), this.getAllEntries()
             );
             sesion.setAttribute("sales", sessionSales);
- 
+            
+            sesion.setAttribute("salesRecents", salesRecents);
+            
+            System.out.println("TODAS LAS VENTAS RECIENTES: " + salesRecents);
+            
             response.sendRedirect("home_admin.jsp");
         } else {
             //request.getRequestDispatcher("admin.jsp").forward(request, response);
@@ -233,6 +245,7 @@ public class ServletController extends HttpServlet {
         String name = request.getParameter("name");
         String lastName = request.getParameter("last_name");
         String email = request.getParameter("email");
+        int phone = Integer.parseInt(request.getParameter("phone"));
         String password = request.getParameter("password");
         String superUser = request.getParameter("super_user");
         boolean valueSuperUser = false;
@@ -247,7 +260,7 @@ public class ServletController extends HttpServlet {
         
         
         try {
-            Admin admin = new Admin(name, lastName, email, encPassword, valueSuperUser);
+            Admin admin = new Admin(name, lastName, email, phone, encPassword, valueSuperUser);
             System.out.println("el siguiente es el admin");
             System.out.println(admin);
             //insertamos el nuevo objeto en la base de datos

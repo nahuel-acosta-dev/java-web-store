@@ -124,10 +124,12 @@ public class ProductsServletController extends HttpServlet {
             
             String jspEdit = "add_product.jsp";
             request.getRequestDispatcher(jspEdit).forward(request, response);
+            response.sendRedirect("add_product.jsp"); 
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
             String jspEdit = "add_product.jsp";
             request.getRequestDispatcher(jspEdit).forward(request, response);
+            //response.sendRedirect("add_product.jsp");
         }
     }
     
@@ -146,7 +148,7 @@ public class ProductsServletController extends HttpServlet {
             
             
             int offsett = 0; //posicion del primer registro de products a mostrar
-            int count = 2; //posicion del ultimo registro de products a mostrar
+            int count = 5; //posicion del ultimo registro de products a mostrar
             
             int currentPage = 1; //pagina actual de la paginacion
             int recordsPerPage = count; //cantidad de registros a mostrar

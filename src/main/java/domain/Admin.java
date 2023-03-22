@@ -12,6 +12,7 @@ public class Admin {
     private int idAdmin;
     private String name;
     private String lastName;
+    private int phone;
     private String email;
     private String password;
     private boolean superUser;
@@ -23,19 +24,21 @@ public class Admin {
         this.idAdmin = idAdmin;
     }
 
-    public Admin(String name, String lastName, String email, String password, boolean superUser) {
+    public Admin(String name, String lastName, String email, int phone, String password, boolean superUser) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
+        this.phone = phone;
         this.password = password;
         this.superUser = superUser;
     }
 
-    public Admin(int idAdmin, String name, String lastName, String email, String password, boolean superUser) {
+    public Admin(int idAdmin, String name, String lastName, String email, int phone, String password, boolean superUser) {
         this.idAdmin = idAdmin;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
+        this.phone = phone;
         this.password = password;
         this.superUser = superUser;
     }
@@ -76,6 +79,14 @@ public class Admin {
         return password;
     }
 
+    public int getPhone() {
+        return phone;
+    }
+
+    public void setPhone(int phone) {
+        this.phone = phone;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -87,13 +98,10 @@ public class Admin {
     public void setSuperUser(boolean superUser) {
         this.superUser = superUser;
     }
-    
 
     @Override
     public String toString() {
-        return "Admin{" + "idAdmin=" + idAdmin + ", name=" + name + ", lastName=" + lastName + ", email=" + email + ", password=" + password + '}';
+        return "Admin{" + "idAdmin=" + idAdmin + ", name=" + name + ", lastName=" + lastName + ", phone=" + phone + ", email=" + email + ", password=" + password + ", superUser=" + superUser + '}';
     }
 
-    
-    
 }

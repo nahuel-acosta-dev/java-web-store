@@ -19,21 +19,21 @@ import java.util.List;
  */
 public class AdminDaoJDBC implements AdminDao {
 
-    private static final String SQL_SELECT = "SELECT id_admin, name, last_name, email, password, super_user "
+    private static final String SQL_SELECT = "SELECT id_admin, name, last_name, email,phone, password, super_user "
             + " FROM admin";
     
     private static final String SQL_SELECT_CREDENTIALS = "SELECT * "
             + "FROM admin WHERE email = ? and password = ?";
                 
 
-    private static final String SQL_SELECT_BY_ID = "SELECT id_admin, name, last_name, email, password, super_user "
+    private static final String SQL_SELECT_BY_ID = "SELECT id_admin, name, last_name, email,phone, password, super_user "
             + "FROM admin WHERE id_admin = ?";
 
-    private static final String SQL_INSERT = "INSERT INTO admin(name, last_name, email, password, super_user) "
-            + " VALUES(?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO admin(name, last_name, email, phone, password, super_user) "
+            + " VALUES(?, ?, ?,?, ?, ?)";
 
     private static final String SQL_UPDATE = "UPDATE admin "
-            + " SET name=?, last_name=?, email=?, password=?, super_user=? WHERE id_admin=?";
+            + " SET name=?, last_name=?, email=?,phone=?, password=?, super_user=? WHERE id_admin=?";
 
     private static final String SQL_DELETE = "DELETE FROM admin WHERE id_admin = ?";
     
@@ -109,10 +109,11 @@ public class AdminDaoJDBC implements AdminDao {
                 String name = rs.getString("name");
                 String lastName = rs.getString("lastName");
                 String email = rs.getString("email");
+                int phone = rs.getInt("phone");
                 String password = rs.getString("password");
                 boolean superUser = rs.getBoolean("super_user");
 
-                admin = new Admin(idAdmin, name, lastName, email, password, superUser);
+                admin = new Admin(idAdmin, name, lastName, email, phone, password, superUser);
 
                 admins.add(admin);
             }
@@ -142,11 +143,13 @@ public class AdminDaoJDBC implements AdminDao {
             String name = rs.getString("name");
             String lastName = rs.getString("lastName");
             String email = rs.getString("email");
+            int phone = rs.getInt("phone");
             String password = rs.getString("password");
 
             admin.setName(name);
             admin.setLastName(lastName);
             admin.setEmail(email);
+            admin.setPhone(phone);
             admin.setPassword(password);
 
         } catch (SQLException ex) {
@@ -196,8 +199,9 @@ public class AdminDaoJDBC implements AdminDao {
             stmt.setString(1, admin.getName());
             stmt.setString(2, admin.getLastName());
             stmt.setString(3, admin.getEmail());
-            stmt.setString(4, admin.getPassword());
-            stmt.setInt(5, admin.getIdAdmin());
+            stmt.setInt(4, admin.getPhone());
+            stmt.setString(5, admin.getPassword());
+            stmt.setInt(6, admin.getIdAdmin());
 
             rows = stmt.executeUpdate();
 

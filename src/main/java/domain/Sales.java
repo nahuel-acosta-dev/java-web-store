@@ -10,13 +10,13 @@ package domain;
  */
 public class Sales {
     
-    private int idSales;
-    private int product;
-    private int user;
-    private boolean state;
-    private boolean delivery_status;
-    private int quantity;
-    private String date;
+    protected int idSales;
+    protected int product;
+    protected int user;
+    protected boolean state;
+    protected boolean delivery_status;
+    protected int quantity;
+    protected String date;
     
 
     public Sales() {

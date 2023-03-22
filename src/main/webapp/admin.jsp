@@ -13,14 +13,15 @@
                     <jsp:include page="WEB-INF/pages/common/spinner.jsp"/>
                     <!-- Spinner End -->
                     
-                    <span class="text-warning text-uppercase fs-4 fw-normal" role="alert">
-                            <c:if test="${sessionScope['msje_err'] != null}">
-                                ${sessionScope['msje_err']}
-                            </c:if>
-                    </span>
+                    
                     
                     <!-- Sign In Start -->
                     <div class="container-fluid">
+                            <p class="text-warning text-uppercase fs-4 fw-normal text-center mt-1" role="alert">
+                                <c:if test="${sessionScope['msje_err'] != null}">
+                                    ${sessionScope['msje_err']}
+                                </c:if>
+                            </p>
                         <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
                             <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
                                 <form action="${pageContext.request.contextPath}/ServletController?action=login" 

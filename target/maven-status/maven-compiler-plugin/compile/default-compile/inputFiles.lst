@@ -7,9 +7,11 @@ F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\domain\SessionSales
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\domain\Product.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\domain\SessionProducts.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\domain\Category.java
+F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\web\SoldsServletController.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\com\nahuel\dev\storeWeb\resources\JavaEE8Resource.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\data\AdminDao.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\data\GenderDaoJDBC.java
+F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\domain\SessionSalesPagination.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\web\StoreServlet.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\domain\User.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\data\SalesDao.java
@@ -18,6 +20,7 @@ F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\data\ConnectionJDBC
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\data\CategoryDao.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\data\UserDao.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\domain\Admin.java
+F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\domain\SalesExtends.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\data\UserDaoJDBC.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\domain\Gender.java
 F:\Accesos\Desktop\otherProjects\java\storeWeb\src\main\java\web\ProductsServletController.java

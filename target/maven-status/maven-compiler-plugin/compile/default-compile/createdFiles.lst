@@ -19,6 +19,7 @@ domain\SessionProducts.class
 web\ServletController.class
 data\ConnectionJDBC.class
 domain\Admin.class
+domain\SalesExtends.class
 com\nahuel\dev\storeWeb\resources\JavaEE8Resource.class
 domain\User.class
 web\ProductsServletController.class
